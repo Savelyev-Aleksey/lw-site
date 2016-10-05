@@ -1,0 +1,8 @@
+= simple_form_for @activity do |f|
+  = f.input :date, as: :date
+  = f.input :category, collection: Category.all, label_method: :category, 
+    value_method: :id, include_blank: true, class: 'form-control'
+    
+  = f.input :title
+  = f.input :text, as: :text, input_html: {class: 'tinymce', rows: 20}
+  = f.button :submit

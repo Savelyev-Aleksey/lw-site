@@ -1,0 +1,22 @@
+h1.text-center = t :gallery
+
+- if user_signed_in?
+  p 
+    = link_to new_photo_path, class: 'btn btn-primary', role: 'button' do
+      span.glyphicon.glyphicon-file>
+      = t :add
+
+.row.gallery-list
+  - @albums.each do |album|
+    div.gallery-list-elem.col-sm-12.col-md-6
+      = link_to photo_path(album) do
+        .img-preview
+          - if album.cover_id?
+            = image_tag album.photos.find(album.cover_id).picture.url(:medium)
+          - else
+            span.glyphicon.glyphicon-picture
+        .img-title
+          = album.title
+    
+= paginate @albums    
+  

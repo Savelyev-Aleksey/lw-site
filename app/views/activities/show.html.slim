@@ -1,0 +1,17 @@
+h1.text-center = @activity.title
+
+- if user_signed_in?
+  = form_for activity_path(@activity), method: :delete, 
+    data: {confirm: 'Вы уверены?'} do |f|
+    
+    .btn-group role="group" aria-label='Manage news'
+      = link_to edit_activity_path(@activity), class: 'btn btn-warning', role: 'button' do
+        span.glyphicon.glyphicon-pencil>
+        = t :edit
+      
+      = f.button class: 'btn btn-danger', role: 'button' do
+          span.glyphicon.glyphicon-trash>
+          = t :delete
+
+.date = @activity.date.strftime '%d.%m.%Y'
+.description == @activity.text

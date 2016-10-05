@@ -1,0 +1,11 @@
+- unless notice.blank?
+  p.alert.alert-success role='alert' 
+    button type="button" class="close" data-dismiss="alert" aria-label="Close" 
+      span aria-hidden="true" &times;
+    = notice 
+
+- unless alert.blank?
+  p.alert.alert-danger role='alert' 
+    button type="button" class="close" data-dismiss="alert" aria-label="Close" 
+      span aria-hidden="true" &times;
+    = alert 

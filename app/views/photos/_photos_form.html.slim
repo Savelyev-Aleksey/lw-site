@@ -1,0 +1,7 @@
+#dropzone_uploader
+  = simple_form_for :photos, url: photo_add_image_path(@album),
+    wrapper: :horizontal_form, wrapper_mappings: {file: :horizontal_file_input},
+    method: :patch, html: {class: 'dropzone', id: 'photo_uploader'} do |f|
+    .fallback
+      = f.input_field :picture, as: :file, accept: 'image/jpeg', multiple: true
+      = f.submit

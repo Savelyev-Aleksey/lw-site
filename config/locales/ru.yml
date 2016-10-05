@@ -1,0 +1,14 @@
+ru:
+  activities: События
+  add: Добавить
+  edit: Изменить
+  update: Обновить
+  delete: Удалить
+  removing: Удаление
+  add_activity: Добавить событие
+  back: Назад
+
+  do_album_cover: Сделать обложкой альбома
+
+  model:
+    activity: Событие

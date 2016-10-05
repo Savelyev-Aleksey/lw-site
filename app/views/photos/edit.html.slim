@@ -1,0 +1,5 @@
+h1.text-center = t :edit_photo_album
+
+p = link_to t(:back), photo_path(@album), class: 'btn btn-default'
+
+= render partial: 'form', locals: {path: photo_path(@album)}

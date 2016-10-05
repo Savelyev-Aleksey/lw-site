@@ -1,0 +1,14 @@
+h1.text-center = t :activities
+
+- if user_signed_in?
+  p
+    = link_to new_activity_path, class: 'btn btn-primary', role: 'button' do
+      span.glyphicon.glyphicon-file>
+      = t :add
+
+
+ul
+  - @activities.each do |elem|
+    li  = link_to elem.title, elem
+
+= paginate @activities

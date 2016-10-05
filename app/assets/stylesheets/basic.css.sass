@@ -1,0 +1,76 @@
+@import "ubuntu/ubuntu.sass"
+
+html, body
+  height: 100%
+
+body
+  font-family: 'ubuntu'
+  font-size: 18px
+  &.overflow
+    overflow: hidden
+
+html.turbolinks-progress-bar::before
+  content: ' '
+  position: absolute
+  background-color: #D9534F !important
+  height: 5px !important
+  z-index: 1
+
+// menu styling
+
+.navbar-default
+  .navbar-brand .brand-name
+    font-size: 12px
+  .navbar-nav
+    > li
+      > a
+        border-bottom: 6px solid transparent
+        padding-bottom: 9px
+        transition: background-color  1s 0s ease, border 1s 0s ease
+        &.news
+          &.active
+            border-color: #ffef8b
+          &:hover
+            border-color: #ffef8b
+            background-color: #ffef8b
+        &.contacts
+          &.active
+            border-color: #D6F796
+          &:hover
+            border-color: #D6F796
+            background-color: #D6F796
+        &.videos
+          &.active
+            border-color: #CFD8E0
+          &:hover
+            border-color: #CFD8E0
+            background-color: #CFD8E0
+        &.activities
+          &.active
+            border-color: #E2C4F7
+          &:hover
+            border-color: #E2C4F7
+            background-color: #E2C4F7
+        &.photos
+          &.active
+            border-color: #F9DDB3
+          &:hover
+            border-color: #F9DDB3
+            background-color: #F9DDB3
+        &.qa
+          &.active
+            border-color: #F7CEC8
+          &:hover
+            border-color: #F7CEC8
+            background-color: #F7CEC8
+        &.about
+          &.active
+            border-color: #C8F7DD
+          &:hover
+            border-color: #C8F7DD
+            background-color: #C8F7DD
+
+.block-shadow
+  border: 1px solid #ddd
+  box-shadow: 0 5px 25px #ccc
+  padding: 20px

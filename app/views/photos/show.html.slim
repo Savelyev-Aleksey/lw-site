@@ -1,0 +1,40 @@
+h2.text-center = @album.title
+
+- if user_signed_in?
+  = form_for photo_path(@album), method: :delete, 
+    data: {confirm: 'Вы уверены?'} do |f|
+    
+    .btn-group role="group" aria-label='Manage album'
+    
+      = link_to edit_photo_path(@album), class: 'btn btn-warning', role: 'button' do
+        span.glyphicon.glyphicon-pencil>
+        = t :edit
+    
+      = f.button class: 'btn btn-danger', role: 'button' do
+          span.glyphicon.glyphicon-trash>
+          = t :delete
+
+.description == @album.description
+
+- if user_signed_in?
+  = render partial: 'photos_form'
+
+#main-carousel-wrapper.carousel-wrapper.hidden
+  #main-carousel.carousel.slide.transition
+      
+    / --- Wrapper for slides ---
+    .carousel-inner role='listbox'
+                
+    // --- Controls ---
+    
+    a.left.carousel-control href='#main-carousel' role='button' data-slide='prev'
+      span.glyphicon.glyphicon-chevron-left aria-hidden="true"
+      span.sr-only Previous
+    
+    a.right.carousel-control href='#main-carousel' role='button' data-slide='next'
+      span.glyphicon.glyphicon-chevron-right aria-hidden="true"
+      span.sr-only Next
+
+#photo-gallery.row
+  - @album.photos.each do |photo|
+    = render 'thumb', photo: photo

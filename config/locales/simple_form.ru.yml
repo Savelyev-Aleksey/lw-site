@@ -1,0 +1,18 @@
+ru:
+  log_in: Вход
+  log_out: Выход
+  sign_up: Регистрация
+  Forgot your password?: Забыли пароль?
+  count_characters_minimum: "%{count} символов минимум"
+  simple_form:
+    required:
+      text: Обязательно для заполнения
+      mark: '*'
+    labels:
+      defaults:
+        email: Почта
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        remember_me: Запомнить меня
+    hints:
+      defaults:

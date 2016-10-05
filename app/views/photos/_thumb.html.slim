@@ -1,0 +1,18 @@
+- cover = @album.cover_id == photo.id
+.gallery-elem.col-xs-12.col-sm-6.col-md-4.col-lg-6 class=\
+  ('cover' if cover)
+  .image-block
+    = image_tag photo.picture.url(:medium), class: 'gallery-photo',
+      'data-url' => photo.picture.url(:large)
+    
+  - if user_signed_in?
+    = button_to photo_change_cover_path(photo), 
+      method: :patch, class: 'btn btn-danger', role: 'button', disabled: cover,
+      form_class: 'cover-form', title: t(:do_album_cover)  do
+        span.glyphicon.glyphicon-bookmark
+
+    = button_to photo_remove_image_path(@album, photo), 
+      method: :delete, data: {disable_with: t(:removing)}, 
+      class: 'btn btn-danger', role: 'button', form_class: 'remove-form'  do
+        span.glyphicon.glyphicon-trash>
+        = t :delete
