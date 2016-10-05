@@ -1,7 +1,3 @@
-# Pagination for [Twitter Bootstrap 3](http://getbootstrap.com/components/#pagination)
+# Live Word church site
 
-With support for:
-
-- erb
-- haml
-- slim
+Work in progress.
