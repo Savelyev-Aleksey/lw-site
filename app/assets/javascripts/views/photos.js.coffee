@@ -109,4 +109,4 @@ photos_ready = ->
   init_change_cover_bind()
   return
 
-$(document).on 'ready page:load', photos_ready
+document.addEventListener "turbolinks:load", photos_ready

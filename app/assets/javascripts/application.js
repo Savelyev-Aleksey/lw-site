@@ -18,5 +18,3 @@
 //= require tinymce
 //= require dropzone
 //= require_tree ./views
-
-$(document).ready(function(){Turbolinks.enableProgressBar(true);})

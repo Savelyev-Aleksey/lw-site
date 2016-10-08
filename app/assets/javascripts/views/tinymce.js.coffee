@@ -1,10 +1,13 @@
 tin_obj = null
 tinymce_ready = ->
 
-  tin_obj = tinyMCE.init
+  return unless $('textarea.tinymce').length
+
+  tinymce.init
     selector: 'textarea.tinymce'
+    height: 300
     language: 'ru'
-    toolbar:
+    toolbar1:
        "insertfile undo redo | cut copy paste | styleselect | bold italic |
         alignleft aligncenter alignright alignjustify |
         bullist numlist outdent indent | link image"
@@ -29,11 +32,10 @@ tinymce_ready = ->
       wordcount"
   return
 
-clean_tiny = ->
-  tin_obj.destroy()
-  return
+tinymce_destructor = ->
+  return unless $('textarea.tinymce').length
+  tinymce.remove if tinymce
 
-$(document).on 'ready page:load', tinymce_ready
-$(document).on 'page:after-remove', clean_tiny
 
-# $(document).on 'page:restore', tinymce_ready
+document.addEventListener 'turbolinks:load', tinymce_ready
+document.addEventListener 'turbolinks:visit', tinymce_destructor
