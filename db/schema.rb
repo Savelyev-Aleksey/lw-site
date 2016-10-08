@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,16 +12,18 @@
 
 ActiveRecord::Schema.define(version: 20151219195653) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.datetime "date"
-    t.text     "text",        limit: 65535
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title",       limit: 255
-    t.integer  "category_id", limit: 4
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_activities_on_category_id", using: :btree
   end
-
-  add_index "activities", ["category_id"], name: "index_activities_on_category_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string "title", limit: 255
@@ -31,22 +32,21 @@ ActiveRecord::Schema.define(version: 20151219195653) do
 
   create_table "photo_albums", force: :cascade do |t|
     t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "cover_id",    limit: 4
+    t.integer  "cover_id"
   end
 
   create_table "photos", force: :cascade do |t|
     t.string   "description",          limit: 255
-    t.integer  "photo_album_id",       limit: 4
+    t.integer  "photo_album_id"
     t.string   "picture_file_name",    limit: 255
     t.string   "picture_content_type", limit: 255
-    t.integer  "picture_file_size",    limit: 4
+    t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.index ["photo_album_id"], name: "index_photos_on_photo_album_id", using: :btree
   end
-
-  add_index "photos", ["photo_album_id"], name: "index_photos_on_photo_album_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -54,37 +54,34 @@ ActiveRecord::Schema.define(version: 20151219195653) do
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "video_albums", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "text",       limit: 255
     t.datetime "date"
-    t.integer  "video_id",   limit: 4
+    t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["video_id"], name: "index_video_albums_on_video_id", using: :btree
   end
-
-  add_index "video_albums", ["video_id"], name: "index_video_albums_on_video_id", using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "description",    limit: 255
-    t.integer  "video_album_id", limit: 4
+    t.integer  "video_album_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["video_album_id"], name: "index_videos_on_video_album_id", using: :btree
   end
-
-  add_index "videos", ["video_album_id"], name: "index_videos_on_video_album_id", using: :btree
 
   add_foreign_key "activities", "categories"
 end
