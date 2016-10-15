@@ -1,6 +1,6 @@
+fileUploader = null
 init_photo_uploader = ->
-  Dropzone.autoDiscover = false
-  $("#photo_uploader").dropzone
+  fileUploader = new Dropzone "#photo_uploader",
     maxFilesize: 5
     paramName: "photos[picture]"
     # uploadMultiple: true

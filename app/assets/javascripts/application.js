@@ -15,6 +15,17 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-sprockets
-//= require tinymce
+//- require tinymce
 //= require dropzone
 //= require_tree ./views
+
+//= require tinymce/tinymce.min.js
+
+Dropzone.autoDiscover = false
+
+// Prevent Bootstrap dialog from blocking focusin
+$(document).on('focusin', function(e) {
+  if ($(e.target).closest(".mce-window").length) {
+    e.stopImmediatePropagation();
+  }
+});
