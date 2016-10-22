@@ -1,112 +1,162 @@
-fileUploader = null
-init_photo_uploader = ->
-  fileUploader = new Dropzone "#photo_uploader",
-    maxFilesize: 5
-    paramName: "photos[picture]"
-    # uploadMultiple: true
-    init: ->
-      this.on 'success', (file, responseText) ->
-        # After successful uploading add photo in image list
-        $('#photo-gallery').append responseText.thumb
-        url = $(responseText.thumb).find('img').attr('data-url')
-        carousel = $('#main-carousel .carousel-inner')
-        # After successful uploading add photo in intialised carousel
-        carousel.append new_carousel_item(url) if carousel.length
+class FileUploader
+  constructor: (uploader) ->
+    @dropzone = new Dropzone uploader,
+      maxFilesize: 5
+      paramName: "photos[picture]"
+      init: ->
+        this.on 'success', (file, responseText) ->
+          # After successful uploading add photo in image list
+          $('#photo-gallery').append responseText.thumb
+          url = $(responseText.thumb).find('img').attr('data-url')
+          carousel = $('#main-carousel .carousel-inner')
+          # After successful uploading add photo in intialised carousel
+          carousel.append Carousel::new_carousel_item(url) if carousel.length
 
-        setTimeout ->
-          file.previewElement.remove()
+          setTimeout ->
+            file.previewElement.remove()
+            return
+          , 1500
           return
-        , 1500
         return
-      return
-
-new_carousel_item = (url)->
-  item = $('<div></div>').addClass('item')
-  img = $('<img>').attr src: url
-  item.append(img)
-  item
-
-init_carousel = ->
-  # hide carousel
-  $('#main-carousel .carousel-inner').on 'click', ->
-    $('#main-carousel-wrapper').addClass('hidden')
-    $(document.body).removeClass('overflow')
     return
 
-  # show gallery on image click
-  $('#photo-gallery').on 'click', 'img', ->
-    event_img = this
-    item_parent = $('#main-carousel .carousel-inner')
-    # prepare image list if clicked first time
-    if (!item_parent.children().length)
-      $('#photo-gallery').find('img').each (i)->
-        item = new_carousel_item $(this).attr('data-url')
-        if (event_img == this)
-          item.addClass('active')
-        item_parent.append item
-        return
 
-      $('#main-carousel').carousel
-        interval: 5000
-        wrap: false
-    else
+
+  destroy: ->
+    @dropzone.destroy()
+    return
+
+
+
+
+
+class Carousel
+
+  prevent_submiting: ->
+    @gallery.on 'submit', 'form', (e) ->
+      $.rails.handleRemote $(this)
+      e.preventDefault()
+      return
+    return
+
+  new_carousel_item: (url)->
+    item = $('<div></div>').addClass('item')
+    img = $('<img>').attr src: url
+    item.append(img)
+
+
+  fill_carousel: ->
+    obj = @
+    @gallery.find('img').each (i) ->
+      item = obj.new_carousel_item this.attributes['data-url'].value
+      obj.carousel_inner.append item
+      return
+
+
+
+  show_element: (img) ->
+    obj = @
+    @carousel_inner.find('.active').removeClass('active')
+    @gallery.find('img').each (i) ->
+      if (img == this)
+        $(obj.carousel_inner.find('.item').get(i)).addClass('active')
+        obj.carousel.carousel i
+        return false
+      return
+
+
+
+  constructor: ->
+    @wrapepr = $('#main-carousel-wrapper')
+    @carousel = $('#main-carousel')
+    @carousel_inner = $('#main-carousel .carousel-inner')
+    @gallery = $('#photo-gallery')
+
+    # hide carousel
+    @carousel_inner.on 'click', =>
+      @wrapepr.addClass('hidden')
+      @carousel.carousel('pause')
+      $(document.body).removeClass('overflow')
+      return
+
+    @prevent_submiting()
+    @change_cover_bind()
+    @delete_image_bind()
+
+    # show gallery on image click
+    obj = @
+    @gallery.on 'click', 'img', ->
+      # prepare image list if clicked first time
+      if (!obj.carousel_inner.children().length)
+        obj.fill_carousel()
+        obj.carousel.carousel
+          interval: 5000
+          wrap: false
+
       # select current image in already prepared carousel
-      item_parent.find('.active').removeClass('active')
-      $('#photo-gallery img').each (i)->
-        if (event_img == this)
-          $($('#main-carousel .carousel-inner .item').get(i)).addClass('active')
-          return false
-        return
+      obj.show_element(event.target)
 
-    $('#main-carousel-wrapper').removeClass('hidden')
-    $(document.body).addClass('overflow')
-    return
-  return
-
-
-init_prevent_submiting = ->
-  $('#photo-gallery').on 'submit', 'form', (e) ->
-    $.rails.handleRemote $(this)
-    e.preventDefault()
-    return
-
-init_delete_image_bind = ->
-  $('#photo-gallery').on 'ajax:success', 'form.remove-form',
-  (evt, data, status, xhr)->
-    div_parent = $(this).parent('div.gallery-elem').addClass('image-deleted')
-    setTimeout ->
-      # Remove image from carousel if already initialized
-      if $('#main-carousel .carousel-inner .item').length
-        $('#photo-gallery div.gallery-elem').each (i)->
-          if (div_parent[0] == this)
-            $($('#main-carousel .carousel-inner .item').get(i)).remove()
-            return false
-          return
-      div_parent.remove()
+      # show carousel
+      obj.wrapepr.removeClass('hidden')
+      # show black background
+      $(document.body).addClass('overflow')
       return
-    , 1300
     return
-  return
 
-init_change_cover_bind = ->
-  $('#photo-gallery').on 'ajax:success', 'form.cover-form',
-  (evt, data, status, xhr)->
-    cover = $('#photo-gallery div.cover')
-    if cover
-      cover.removeClass('cover')
-      cover.find('button[type=submit]').removeAttr('disabled')
-    div_parent = $(this).parent('div.gallery-elem')
-    div_parent.addClass('cover')
-    div_parent.find('button[type=submit]').attr('disabled', true)
+
+
+  change_cover_bind: ->
+    obj = @
+    @gallery.on 'ajax:success', 'form.cover-form',
+    (evt, data, status, xhr)->
+      cover = obj.gallery.find('div.cover')
+      if cover
+        cover.removeClass('cover')
+        cover.find('button[type=submit]').removeAttr('disabled')
+      div_parent = $(this).parent('div.gallery-elem')
+      div_parent.addClass('cover')
+      div_parent.find('button[type=submit]').attr('disabled', true)
+      return
     return
+
+
+
+  delete_image_bind: ->
+    obj = @
+    @gallery.on 'ajax:success', 'form.remove-form',
+    (evt, data, status, xhr)->
+      div_parent = $(this).parent('div.gallery-elem').addClass('image-deleted')
+      setTimeout ->
+        # Remove image from carousel if already initialized
+        if obj.carousel_inner.find('.item').length
+          obj.gallery.find('div.gallery-elem').each (i)->
+            if (div_parent[0] == this)
+              obj.carousel_inner.find('.item').get(i).remove()
+              return false
+            return
+        div_parent.remove()
+        return
+      , 1300
+      return
+    return
+
+
+
+
+
+carousel = null
+uploader = null
+
+document.addEventListener "turbolinks:load", ->
+  if document.getElementById 'main-carousel'
+    carousel = new Carousel
+
+  if document.getElementById 'photo_uploader'
+    uploader = new FileUploader '#photo_uploader'
   return
 
-photos_ready = ->
-  init_photo_uploader()
-  init_carousel()
-  init_prevent_submiting()
-  init_delete_image_bind()
-  init_change_cover_bind()
+document.addEventListener "turbolinks:visit", ->
+  carousel = null
+  uploader.destroy() if uploader
+  uploader = null
   return
-
-document.addEventListener "turbolinks:load", photos_ready
