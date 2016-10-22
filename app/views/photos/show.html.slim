@@ -17,7 +17,7 @@ h2.text-center = @album.title
 .description == @album.description
 
 - if user_signed_in?
-  = render partial: 'photos_form'
+  = render partial: 'upload_form'
 
 #main-carousel-wrapper.carousel-wrapper.hidden
   #main-carousel.carousel.slide.transition

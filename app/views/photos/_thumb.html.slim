@@ -11,8 +11,8 @@
       form_class: 'cover-form', title: t(:do_album_cover)  do
         span.glyphicon.glyphicon-bookmark
 
-    = button_to photo_remove_image_path(@album, photo), 
-      method: :delete, data: {disable_with: t(:removing)}, 
+    = button_to photo_remove_image_path(@album, photo), method: :delete,
+      form: {'data-type': :json}, data: {disable_with: t(:removing)}, 
       class: 'btn btn-danger', role: 'button', form_class: 'remove-form'  do
         span.glyphicon.glyphicon-trash>
         = t :delete
