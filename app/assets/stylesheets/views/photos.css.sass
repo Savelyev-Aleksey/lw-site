@@ -37,11 +37,28 @@
   border: 4px dashed #0087F7
   border-radius: 4px
 
-  .dz-preview.dz-image-preview
+  .dz-message
+    text-align: center
+    padding: 50px
+
+  .dz-details
+    width: 120px
+
+  .dz-preview
+    overflow: hidden
     background-color: initial
+    transition: width 0.5s ease-out 0.4s
+    .dz-filename
+      display: none
+
+    &.dz-success
+      width: 0
 
   &.dz-drag-hover
-    background-color: #A0C7FF
+    background-color: #0087F7
+
+    .dz-message
+      color: white
 
 #main-carousel-wrapper
   position: fixed

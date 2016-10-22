@@ -6,8 +6,8 @@
       'data-url' => photo.picture.url(:large)
     
   - if user_signed_in?
-    = button_to photo_change_cover_path(photo), 
-      method: :patch, class: 'btn btn-danger', role: 'button', disabled: cover,
+    = button_to photo_change_cover_path(photo), method: :patch, role: 'button',
+      form: {'data-type': :json}, class: 'btn btn-danger',  disabled: cover,
       form_class: 'cover-form', title: t(:do_album_cover)  do
         span.glyphicon.glyphicon-bookmark
 
