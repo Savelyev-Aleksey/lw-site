@@ -14,5 +14,8 @@ h1.text-center = @activity.title
           = t :delete
     p &nbsp; 
 
-.date = @activity.date.strftime '%d.%m.%Y'
-.description == @activity.text
+section.activity
+  .info-block
+    .date-block = l @activity.date
+    .clearfix
+  .description == @activity.text

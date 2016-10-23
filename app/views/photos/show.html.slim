@@ -14,7 +14,16 @@ h2.text-center = @album.title
           span.glyphicon.glyphicon-trash>
           = t :delete
 
-.description == @album.description
+section.album-description
+  .info-block
+    
+    - unless @album.start_date.nil?
+      .date-block
+        => l @album.start_date
+        ' &mdash; 
+        = l @album.end_date
+    .clearfix
+  .description == @album.description
 
 - if user_signed_in?
   = render partial: 'upload_form'
