@@ -1,3 +1,8 @@
+carousel = null
+uploader = null
+
+
+
 class FileUploader
   constructor: (uploader) ->
     @dropzone = new Dropzone uploader,
@@ -8,9 +13,8 @@ class FileUploader
           # After successful uploading add photo in image list
           $('#photo-gallery').append responseText.thumb
           url = $(responseText.thumb).find('img').attr('data-url')
-          carousel = $('#main-carousel .carousel-inner')
           # After successful uploading add photo in intialised carousel
-          carousel.append Carousel::new_carousel_item(url) if carousel.length
+          carousel.append_image(url) if carousel? and carousel.filled()
 
           setTimeout ->
             file.previewElement.remove()
@@ -39,17 +43,20 @@ class Carousel
       return
     return
 
-  new_carousel_item: (url)->
+
+
+  append_image: (url) ->
     item = $('<div></div>').addClass('item')
     img = $('<img>').attr src: url
     item.append(img)
+    @carousel_inner.append item
+    return
 
 
   fill_carousel: ->
     obj = @
     @gallery.find('img').each (i) ->
-      item = obj.new_carousel_item this.attributes['data-url'].value
-      obj.carousel_inner.append item
+      obj.append_image this.attributes['data-url'].value
       return
 
 
@@ -64,6 +71,9 @@ class Carousel
         return false
       return
 
+
+  filled: ->
+    @carousel_inner.children().length
 
 
   constructor: ->
@@ -87,7 +97,7 @@ class Carousel
     obj = @
     @gallery.on 'click', 'img', ->
       # prepare image list if clicked first time
-      if (!obj.carousel_inner.children().length)
+      if (!obj.filled())
         obj.fill_carousel()
         obj.carousel.carousel
           interval: 5000
@@ -128,7 +138,7 @@ class Carousel
       div_parent = $(this).parent('div.gallery-elem').addClass('image-deleted')
       setTimeout ->
         # Remove image from carousel if already initialized
-        if obj.carousel_inner.find('.item').length
+        if obj.filled()
           obj.gallery.find('div.gallery-elem').each (i)->
             if (div_parent[0] == this)
               obj.carousel_inner.find('.item').get(i).remove()
@@ -144,8 +154,7 @@ class Carousel
 
 
 
-carousel = null
-uploader = null
+
 
 document.addEventListener "turbolinks:load", ->
   if document.getElementById 'main-carousel'

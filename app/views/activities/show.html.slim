@@ -12,6 +12,7 @@ h1.text-center = @activity.title
       = f.button class: 'btn btn-danger', role: 'button' do
           span.glyphicon.glyphicon-trash>
           = t :delete
+    p &nbsp; 
 
 .date = @activity.date.strftime '%d.%m.%Y'
 .description == @activity.text
