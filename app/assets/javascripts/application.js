@@ -17,9 +17,11 @@
 //= require bootstrap-sprockets
 //- require tinymce
 //= require dropzone
+//= require tinymce/tinymce.min.js
+
+
 //= require_tree ./views
 
-//= require tinymce/tinymce.min.js
 
 Dropzone.autoDiscover = false
 

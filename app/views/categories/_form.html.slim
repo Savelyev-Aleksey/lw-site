@@ -1,0 +1,9 @@
+= simple_form_for category, wrapper: :inline_form, 
+  html: { class: 'form-inline' } do |f|
+  
+  .input-group    
+    = f.input :title, wrapper_html: {class: 'input-group-btn'}, label: false
+    = f.input :color, as: :color, wrapper_html: {class: 'input-group-btn'}, label: false
+    
+    span.input-group-btn
+      = f.button :submit

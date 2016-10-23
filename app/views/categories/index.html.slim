@@ -1,0 +1,8 @@
+h1.text-center = t :add_category
+
+= render partial: 'form', locals: {category: @category}
+
+h2.text-center = t :categories
+
+- @categories.each do |category|
+  = render partial: 'edit_form', locals: {category: category}

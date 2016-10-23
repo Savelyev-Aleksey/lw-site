@@ -1,4 +1,8 @@
 class Category < ActiveRecord::Base
+  include Trimmed
+
   has_many :activity
-  has_many :news
+
+  validates :title, :color, presence: true
+  
 end

@@ -4,7 +4,7 @@ h2.text-center = @album.title
   = form_for photo_path(@album), method: :delete, 
     data: {confirm: 'Вы уверены?'} do |f|
     
-    .btn-group role="group" aria-label='Manage album'
+    p.btn-group role="group" aria-label='Manage album'
     
       = link_to edit_photo_path(@album), class: 'btn btn-warning', role: 'button' do
         span.glyphicon.glyphicon-pencil>

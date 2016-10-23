@@ -1,10 +1,13 @@
 h1.text-center = t :activities
 
 - if user_signed_in?
-  p
+  p.btn-group role="group" aria-label='Manage album'
     = link_to new_activity_path, class: 'btn btn-primary', role: 'button' do
       span.glyphicon.glyphicon-file>
       = t :add
+    = link_to categories_path, class: 'btn btn-success', role: 'button' do
+      span.glyphicon.glyphicon-file>
+      = t :categories  
 
 
 ul
