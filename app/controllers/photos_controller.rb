@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @albums = PhotoAlbum.order(created_at: :desc).page params[:page]
+    @albums = PhotoAlbum.order(start_date: :desc).page params[:page]
   end
 
   def show
@@ -131,7 +131,8 @@ class PhotosController < ApplicationController
   private
 
   def photo_album_params
-    params.require(:photo_album).permit(:title, :description)
+    params.require(:photo_album).permit(:title, :description, :start_date,
+    :end_date)
   end
 
 

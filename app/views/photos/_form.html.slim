@@ -1,5 +1,10 @@
 = simple_form_for @album, url: path do |f|
 
   = f.input :title
+  .row
+    .col-sm-6
+      = f.input :start_date
+    .col-sm-6
+      = f.input :end_date
   = f.input :description, as: :text, input_html: {class: 'tinymce', rows: 20}
   = f.button :submit
