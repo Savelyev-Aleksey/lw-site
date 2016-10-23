@@ -16,6 +16,11 @@ h1.text-center = @activity.title
 
 section.activity
   .info-block
+    - unless @activity.category.nil?
+      .category style="background-color: #{@activity.category.color}; \
+      color: #{light?(@activity.category.color) ? 'black' : 'white'}"
+        = @activity.category.title
+        
     .date-block = l @activity.date
     .clearfix
   .description == @activity.text

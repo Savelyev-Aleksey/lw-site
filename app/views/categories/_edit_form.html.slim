@@ -8,7 +8,7 @@
     
     span.input-group-btn
       = f.button :submit, class: 'btn-success'
-      = button_to category_path(category), method: :delete, role: 'button',
+      = link_to category_path(category), method: :delete, role: 'button',
         data: {disable_with: t(:removing)}, class: 'btn btn-danger',
         form_class: 'remove-form'  do
           span.glyphicon.glyphicon-trash>
