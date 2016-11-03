@@ -48,6 +48,8 @@ html.turbolinks-progress-bar
             
             - if user_signed_in?
               li=link_to t(:log_out), destroy_user_session_path, method: :delete
+            - else
+              li=link_to t(:sign_in), new_user_session_path
     .container  
       = render partial: 'layouts/flash'
       
