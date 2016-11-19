@@ -6,5 +6,6 @@
   = f.input :title
   = f.input :text, as: :text, input_html: {class: 'tinymce', rows: 20}
   = f.input :photo_album_id, collection: @albums, value_method: :id,
-    label_method: :title_with_year, selected: @activity.photo_album_id
+    label_method: :title_with_year, selected: @activity.photo_album_id,
+    include_blank: true
   = f.button :submit
