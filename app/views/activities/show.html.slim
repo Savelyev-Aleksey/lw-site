@@ -24,3 +24,40 @@ section.activity
     .date-block = l @activity.date
     .clearfix
   .description == @activity.text
+
+
+
+- unless @activity.photo_album_id.nil?    
+  - album = @activity.photo_album
+
+  section.album-description
+
+    .info-block
+      = link_to t(:go_to_photo_album), photo_path(album)
+
+    #main-carousel-wrapper.carousel-wrapper.hidden
+      #main-carousel.carousel.slide.transition
+          
+        / --- Wrapper for slides ---
+        .carousel-inner role='listbox'
+                    
+        // --- Controls ---
+        
+        a.left.carousel-control href='#main-carousel' role='button' data-slide='prev'
+          span.glyphicon.glyphicon-chevron-left aria-hidden="true"
+          span.sr-only Previous
+        
+        a.right.carousel-control href='#main-carousel' role='button' data-slide='next'
+          span.glyphicon.glyphicon-chevron-right aria-hidden="true"
+          span.sr-only Next
+
+    #photo-gallery.row
+      - album.photos.first(8).each do |photo|    
+        .gallery-elem.col-xs-12.col-sm-6.col-md-4.col-lg-6
+          .image-block
+            = image_tag photo.picture.url(:medium), class: 'gallery-photo',
+              'data-url' => photo.picture.url(:large)
+    
+    .info-block
+      p &nbsp;
+      = link_to t(:go_to_photo_album), photo_path(album)          

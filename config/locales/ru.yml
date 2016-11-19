@@ -9,6 +9,7 @@ ru:
   back: Назад
 
   do_album_cover: Сделать обложкой альбома
+  go_to_photo_album: Перейти к фотоальбому
 
   model:
     activity: Событие
