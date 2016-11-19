@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   validates :title, :text, :date, presence: true
 
   belongs_to :category
-  has_one :photo_ablum
+  belongs_to :photo_album
 
   paginates_per 10
 

@@ -18,9 +18,9 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find params[:id]
-    @albums = @activity.ablum_id.nil? ?
+    @albums = @activity.photo_album_id.nil? ?
       PhotoAlbum.order(start_date: :desc,title: :asc).first(10) :
-      PhotoAlbum.find(@activity.ablum_id)
+      [@activity.photo_album]
   end
 
   def create
@@ -70,7 +70,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.require(:activity).permit(:title, :text, :date, :category_id,
-    :album_id)
+    :photo_album_id)
   end
 
 end
