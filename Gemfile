@@ -39,6 +39,8 @@ gem 'jbuilder'
 gem 'kaminari'
 # easy file drag & drop uploader
 gem 'dropzonejs-rails'
+# select box with search
+gem 'selectize-rails'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development

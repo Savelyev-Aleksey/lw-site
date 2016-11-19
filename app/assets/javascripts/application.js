@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //- require tinymce
 //= require dropzone
+//= require selectize
 //= require tinymce/tinymce.min.js
 
 

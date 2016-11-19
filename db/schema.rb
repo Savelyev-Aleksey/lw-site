@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023123031) do
+ActiveRecord::Schema.define(version: 20161118122210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20161023123031) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",       limit: 255
+    t.string   "title",          limit: 255
     t.integer  "category_id"
+    t.integer  "photo_album_id"
     t.index ["category_id"], name: "index_activities_on_category_id", using: :btree
+    t.index ["photo_album_id"], name: "index_activities_on_photo_album_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -86,4 +88,5 @@ ActiveRecord::Schema.define(version: 20161023123031) do
   end
 
   add_foreign_key "activities", "categories"
+  add_foreign_key "activities", "photo_albums"
 end

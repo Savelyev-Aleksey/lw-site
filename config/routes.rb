@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
 
+  post 'activities/search'
   resources :activities, concerns: :paginatable
   resources :photos, concerns: :paginatable
   patch 'photos/:id/add_image' => 'photos#add_image', as: :photo_add_image
