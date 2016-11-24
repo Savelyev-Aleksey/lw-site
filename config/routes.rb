@@ -1,15 +1,23 @@
 Rails.application.routes.draw do
 
 
+  root 'pages#index'
+  get 'pages/index'
+
   devise_for :users
 
+  get 'about' => 'pages#show', defaults: {symlink: 'about'}
+  get 'contacts' => 'pages#show', defaults: {symlink: 'contacts'}
 
-  root 'welcome#index'
-  get 'welcome/index'
-  get 'about' => 'welcome#about'
+  get 'p' => 'pages#index', as: :pages
+  get 'p/new' => 'pages#new', as: :new_page
+  get 'p/:symlink' => 'pages#show', as: :page
+  get 'p/:symlink/edit' => 'pages#edit', as: :edit_page
+  patch 'p/:symlink', to: 'pages#update'
+  delete 'p/:symlink', to: 'pages#destroy'
 
   concern :paginatable do
-    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+    get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
   post 'activities/search'

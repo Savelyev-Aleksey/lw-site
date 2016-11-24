@@ -1,0 +1,6 @@
+= simple_form_for @page, remote: true do |f|
+    
+  = f.input :title
+  = f.input :symlink
+  = f.input :body, as: :text, input_html: {class: 'tinymce', rows: 20}  
+  = f.button :submit

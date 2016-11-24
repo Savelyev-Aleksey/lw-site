@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118122210) do
+ActiveRecord::Schema.define(version: 20161124084508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20161118122210) do
   create_table "categories", force: :cascade do |t|
     t.string "title", limit: 255
     t.string "color", limit: 255
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "symlink"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "tech"
+    t.index ["symlink"], name: "index_pages_on_symlink", using: :btree
   end
 
   create_table "photo_albums", force: :cascade do |t|

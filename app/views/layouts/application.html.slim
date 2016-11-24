@@ -39,12 +39,14 @@ html.turbolinks-progress-bar
             li: a.photos{ href=photos_path 
               class=('active' if controller.controller_name == 'photos')} Фото
             
-            li: a.qa href='#' Вопросы
+            li: a.qa {href='/questions'
+              class=('active' if current_path? '/questions')} Вопросы
             
-            li: a.contacts href='#' Контакты
+            li: a.contacts{ href='/contacts' 
+              class=('active' if current_path? '/contacts')} Контакты
             
-            li: a.about{ href=about_path 
-              class=('active' if current_path? about_path)} О нас
+            li: a.about{ href='/about' 
+              class=('active' if current_path? '/about')} О нас
             
             - if user_signed_in?
               li=link_to t(:log_out), destroy_user_session_path, method: :delete

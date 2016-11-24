@@ -1,0 +1,19 @@
+h1.text-center = @page.title
+
+- if user_signed_in?
+  = form_for page_path(@page.symlink), method: :delete, remote: true, 
+    data: {confirm: 'Вы уверены?'} do |f|
+    
+    p.btn-group role="group" aria-label='Manage album'
+    
+      = link_to edit_page_path(@page.symlink), class: 'btn btn-warning', 
+        role: 'button' do
+        span.glyphicon.glyphicon-pencil>
+        = t :edit
+    
+      = f.button class: 'btn btn-danger', role: 'button' do
+          span.glyphicon.glyphicon-trash>
+          = t :delete
+      p &nbsp;
+      
+section.page-description == @page.body
