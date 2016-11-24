@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require bootstrap-sprockets
 //- require tinymce
 //= require dropzone
 //= require selectize
