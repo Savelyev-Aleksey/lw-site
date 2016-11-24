@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'about' => 'pages#show', defaults: {symlink: 'about'}
   get 'contacts' => 'pages#show', defaults: {symlink: 'contacts'}
 
-  get 'p' => 'pages#index', as: :pages
+  get 'ministry' => 'pages#index', as: :pages
   get 'p/new' => 'pages#new', as: :new_page
   get 'p/:symlink' => 'pages#show', as: :page
   get 'p/:symlink/edit' => 'pages#edit', as: :edit_page

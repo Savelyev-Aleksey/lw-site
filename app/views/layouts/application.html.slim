@@ -36,8 +36,8 @@ html.turbolinks-progress-bar
             li: a.videos{ href='#' 
               class=('active' if controller.controller_name == 'videos')} Видео
             
-            li: a.ministry{ href='#' 
-              class=('active' if controller.controller_name == 'ministry')} 
+            li: a.ministry{ href=pages_path 
+              class=('active' if current_path? pages_path)} 
               | Служения
             
             li: a.sermons{ href='#' 

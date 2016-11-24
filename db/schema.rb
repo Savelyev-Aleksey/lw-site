@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124084508) do
+ActiveRecord::Schema.define(version: 20161124154604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161124084508) do
   create_table "categories", force: :cascade do |t|
     t.string "title", limit: 255
     t.string "color", limit: 255
+    t.index ["title"], name: "index_categories_on_title", unique: true, using: :btree
   end
 
   create_table "pages", force: :cascade do |t|
@@ -39,7 +40,8 @@ ActiveRecord::Schema.define(version: 20161124084508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "tech"
-    t.index ["symlink"], name: "index_pages_on_symlink", using: :btree
+    t.index ["symlink"], name: "index_pages_on_symlink", unique: true, using: :btree
+    t.index ["title"], name: "index_pages_on_title", unique: true, using: :btree
   end
 
   create_table "photo_albums", force: :cascade do |t|

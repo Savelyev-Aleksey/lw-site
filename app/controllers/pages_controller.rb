@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
 
-  def main    
+  def main
+  end
+
+  def index
+    # TODO: вывести список страниц - служения. Кнопка добалвения нового
+    # подумать над внешним видом ссылок на страницы служений
+    @pages = Page.basic
   end
 
   def show
