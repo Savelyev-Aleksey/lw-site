@@ -1,4 +1,4 @@
-= simple_form_for category, wrapper: :inline_form, 
+= simple_form_for category, wrapper: :inline_form, remote: true, 
   html: { class: 'form-inline' } do |f|
   
   .input-group    
@@ -8,8 +8,8 @@
     
     span.input-group-btn
       = f.button :submit, class: 'btn-success'
-      = link_to category_path(category), method: :delete, role: 'button',
-        data: {disable_with: t(:removing)}, class: 'btn btn-danger',
-        form_class: 'remove-form'  do
+      = link_to category_path(category), method: :delete, remote: true, 
+        role: 'button', data: {disable_with: t(:removing)}, 
+        class: 'btn btn-danger', form_class: 'remove-form'  do
           span.glyphicon.glyphicon-trash>
           = t :delete
