@@ -22,36 +22,50 @@ html.turbolinks-progress-bar
             
           a.navbar-brand href='/' 
             span.glyphicon.glyphicon-home> aria-hidden='true'
-            span.brand-name.visible-md-inline ЖИВОЕ СЛОВО
+            span.brand-name.hidden-sm  ЖИВОЕ СЛОВО
         
         #menu-list.collapse.navbar-collapse
           ul.nav.navbar-nav
             li: a.news{ href=activities_path 
               class=('active' if controller.controller_name == 'activities')} 
               | События            
-            
-            li: a.videos href='#' Видео
-            
-            / li: a.activities{ href=activities_path 
-              class=('active' if controller.controller_name == '')} 
-              | Something
-            
+                        
             li: a.photos{ href=photos_path 
               class=('active' if controller.controller_name == 'photos')} Фото
             
-            li: a.qa {href='/questions'
-              class=('active' if current_path? '/questions')} Вопросы
+            li: a.videos{ href='#' 
+              class=('active' if controller.controller_name == 'videos')} Видео
             
-            li: a.contacts{ href='/contacts' 
-              class=('active' if current_path? '/contacts')} Контакты
+            li: a.ministry{ href='#' 
+              class=('active' if controller.controller_name == 'ministry')} 
+              | Служения
             
-            li: a.about{ href='/about' 
-              class=('active' if current_path? '/about')} О нас
+            li: a.sermons{ href='#' 
+              class=('active' if controller.controller_name == 'sermons')} 
+              | Проповеди                  
             
-            - if user_signed_in?
-              li=link_to t(:log_out), destroy_user_session_path, method: :delete
-            - else
-              li=link_to t(:sign_in), new_user_session_path
+            li.about.dropdown
+              a {href='#' class="dropdown-toggle" data-toggle="dropdown" 
+                role="button" aria-haspopup="true" aria-expanded="false"}
+                ' О нас
+                span.caret
+              ul.dropdown-menu
+                li: a.qa {href='/questions'
+                  class=('active' if current_path? '/questions')} Вопросы
+                
+                li: a.contacts{ href='/contacts' 
+                  class=('active' if current_path? '/contacts')} Контакты
+                
+                li: a.about{ href='/about' 
+                  class=('active' if current_path? '/about')} О нас
+                
+                li.divider role="separator"
+                
+                - if user_signed_in?
+                  li = link_to t(:log_out), destroy_user_session_path, 
+                    method: :delete
+                - else
+                  li = link_to t(:sign_in), new_user_session_path
     .container  
       = render partial: 'layouts/flash'
       

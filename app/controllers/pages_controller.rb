@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
 
-  def index
-    render :index, layout: 'welcome'
+  def main    
   end
 
   def show
