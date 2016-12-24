@@ -1,8 +1,10 @@
-h1.text-center = t :add_category
+.page-header
+  h1.text-center = t(:add_category).mb_chars.upcase
 
 = render partial: 'form', locals: {category: @category}
 
-h2.text-center = t :categories
+.page-header
+  h2.text-center = t :categories
 
 - @categories.each do |category|
   = render partial: 'edit_form', locals: {category: category}

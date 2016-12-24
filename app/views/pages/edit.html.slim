@@ -1,3 +1,11 @@
+.page-header
+  h1.text-center 
+    => t(:edit).mb_chars.upcase
+    ' &mdash;
+    = @page.title.mb_chars.upcase
+
+p = link_to t(:back), page_path(@page.symlink), class: 'btn btn-default'
+
 = simple_form_for @page, url: page_path(@page.symlink), remote: true do |f|
     
   = f.input :title

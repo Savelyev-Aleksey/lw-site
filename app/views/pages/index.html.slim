@@ -1,5 +1,14 @@
-h1.text-center = t(:ministry)
+.page-header
+  h1.text-center = t(:ministry).mb_chars.upcase
 
-ul
+- if user_signed_in?
+  p.btn-group role="group" aria-label='Add new page'
+    = link_to new_page_path, class: 'btn btn-primary', role: 'button' do
+      span.glyphicon.glyphicon-file>
+      = t :add
+    
+.ministries-block.row
   - @pages.each do |page|
-    li = link_to page.title, page_path(page.symlink)
+    = link_to page_path(page.symlink), class: 'ministry-link' do
+      .ministry-elem.col-md-6
+        = page.title

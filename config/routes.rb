@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'ministry' => 'pages#index', as: :pages
   get 'p/new' => 'pages#new', as: :new_page
+  post 'p/new' => 'pages#create'
   get 'p/:symlink' => 'pages#show', as: :page
   get 'p/:symlink/edit' => 'pages#edit', as: :edit_page
   patch 'p/:symlink', to: 'pages#update'

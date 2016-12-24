@@ -1,3 +1,4 @@
-h1.text-center = t :new_photo_album
+.page-header
+  h1.text-center = t(:new_photo_album).mb_chars.upcase
 
 = render partial: 'form', locals: {path: photos_path}

@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  before_action :authenticate_user!, except: [:index, :main, :show]
+
   def main
   end
 
@@ -64,7 +66,7 @@ class PagesController < ApplicationController
     end
 
     if @page.symlink == 'about' || @page.symlink == 'contacts'
-      flash[:alert] = t :page_is_protected
+      flash[:alert] = t :page_delete_is_protected
       redirect_to page_path(@page.symlink)
       return
     end
@@ -75,7 +77,7 @@ class PagesController < ApplicationController
       return
     end
     flash[:notice] = t :page_was_deleted
-    redirect_to root_path
+    redirect_to pages_path
     return
   end
 

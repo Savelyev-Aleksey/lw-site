@@ -1,4 +1,5 @@
-h1.text-center = @activity.title
+.page-header
+  h1.text-center = @activity.title.mb_chars.upcase
 
 - if user_signed_in?
   = form_for activity_path(@activity), method: :delete, 

@@ -23,8 +23,10 @@ class CategoriesController < ApplicationController
     if @category.save
       flash[:notice] = t(:category_added)
       redirect_to categories_path
+      return
     else
       render :new
+      return
     end
   end
 
@@ -33,8 +35,10 @@ class CategoriesController < ApplicationController
     if @category.update category_params
       flash[:notice] = t(:category_edited)
       redirect_to categories_path
+      return
     else
       render :edit
+      return
     end
   end
 
@@ -43,9 +47,11 @@ class CategoriesController < ApplicationController
     if @category.destroy
       flash[:notice] = t(:category_deleted)
       redirect_to categories_path
+      return
     else
       flash[:notice] = t(:category_error_delete)
       redirect_to categories_path
+      return
     end
   end
 

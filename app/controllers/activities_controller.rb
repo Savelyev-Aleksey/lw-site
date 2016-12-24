@@ -28,8 +28,10 @@ class ActivitiesController < ApplicationController
     if @activity.save
       flash[:notice] = t(:activity_added)
       redirect_to @activity
+      return
     else
       render :new
+      return
     end
   end
 
@@ -38,8 +40,10 @@ class ActivitiesController < ApplicationController
     if @activity.update activity_params
       flash[:notice] = t(:activity_edited)
       redirect_to @activity
+      return
     else
       render :edit
+      return
     end
   end
 
@@ -48,9 +52,11 @@ class ActivitiesController < ApplicationController
     if @activity.destroy
       flash[:notice] = t(:activity_deleted)
       redirect_to activity_index_path
+      return
     else
       flash[:notice] = t(:activity_error_delete)
       redirect_to @activity
+      return
     end
   end
 
@@ -63,6 +69,7 @@ class ActivitiesController < ApplicationController
         render json: @albums.as_json(only: [:id], methods: [:title_with_year])
       }
     end
+    return
   end
 
 

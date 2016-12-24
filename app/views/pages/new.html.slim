@@ -1,4 +1,7 @@
-= simple_form_for @page, remote: true do |f|
+.page-header
+  h1.text-center = t(:new_ministry).mb_chars.upcase
+
+= simple_form_for @page, url: new_page_path, remote: false do |f|
     
   = f.input :title
   = f.input :symlink
