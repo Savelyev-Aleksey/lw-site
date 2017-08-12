@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-#gem 'mysql2'
+# gem 'mysql2'
 gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -24,7 +24,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
-gem "paperclip"
+gem 'paperclip'
 
 gem 'tinymce-rails'
 # gem 'tinymce-rails-langs'
@@ -34,7 +34,7 @@ gem 'russian'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 # paginator
@@ -45,7 +45,7 @@ gem 'dropzonejs-rails'
 gem 'selectize-rails'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

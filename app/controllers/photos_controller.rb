@@ -52,12 +52,12 @@ class PhotosController < ApplicationController
 
   def add_image
     @album = PhotoAlbum.find params[:id]
-    if params[:photos] && (params[:photos][:picture].is_a?(Array))
-        params[:photos][:picture].each do |pic|
+    if params[:photos] && params[:photos][:picture].is_a?(Array)
+      params[:photos][:picture].each do |pic|
           @album.photos.build picture: pic
         end
-      else
-        @album.photos.build params.require(:photos).permit(:picture)
+    else
+      @album.photos.build params.require(:photos).permit(:picture)
     end
     if @album.save
       respond_to do |format|
