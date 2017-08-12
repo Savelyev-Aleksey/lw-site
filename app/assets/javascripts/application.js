@@ -10,9 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require turbolinks
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
 //- require tinymce
 //= require dropzone
@@ -23,7 +23,7 @@
 //= require_tree ./views
 
 
-Dropzone.autoDiscover = false
+Dropzone.autoDiscover = false;
 
 // Prevent Bootstrap dialog from blocking focusin
 $(document).on('focusin', function(e) {
