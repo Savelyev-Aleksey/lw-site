@@ -9,11 +9,15 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
+//= require jquery3
+//= require popper
+// provides individual Bootstrap components for ease of debugging
+//= require bootstrap-sprockets
+//--require bootstrap // TODO: check on production instead of bootstrap-sprockets
+
 //= require turbolinks
-//= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //- require tinymce
 //= require dropzone
 //= require selectize

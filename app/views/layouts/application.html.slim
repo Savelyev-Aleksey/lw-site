@@ -13,59 +13,62 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
   body
-    nav.navbar.navbar-default
-      .container
-        .navbar-header
-          button.navbar-toggle.collapsed type='button' data-toggle=\
-            "collapse" data-target="#menu-list" aria-expanded="false"
-            span МЕНЮ
+    .container
+      nav.navbar.navbar-expand-md.navbar-light
 
-          a.navbar-brand href='/'
-            span.glyphicon.glyphicon-home> aria-hidden='true'
-            span.brand-name.hidden-sm  ЖИВОЕ СЛОВО
+        a.navbar-brand href='/'
+          span.glyphicon.glyphicon-home> aria-hidden='true'
+          span.brand-name.hidden-sm  ЖИВОЕ СЛОВО
+
+        button.navbar-toggler{ type='button' data-toggle="collapse" data-target="#menu-list" aria-expanded="false"
+          aria-label="Toggle navigation" aria-controls="menu-list"}
+          span.navbar-toggler-icon
+
 
         #menu-list.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li: a.news{ href=activities_path
+          ul.navbar-nav.mr-auto
+            li.nav-item: a.nav-link.news{ href=activities_path
               class=('active' if controller.controller_name == 'activities')}
               | СОБЫТИЯ
 
-            li: a.photos{ href=photos_path
+            li.nav-item: a.nav-link.photos{ href=photos_path
               class=('active' if controller.controller_name == 'photos')} ФОТО
 
-            li: a.videos{ href='#'
+            li.nav-item: a.nav-link.videos{ href='#'
               class=('active' if controller.controller_name == 'videos')} ВИДЕО
 
-            li: a.ministry{ href=pages_path
+            li.nav-item: a.nav-link.ministry{ href=pages_path
               class=('active' if current_path? pages_path)}
               | СЛУЖЕНИЯ
 
-            li: a.sermons{ href='#'
+            li.nav-item: a.nav-link.sermons{ href='#'
               class=('active' if controller.controller_name == 'sermons')}
               | ПРОПОВЕДИ
 
-            li.about.dropdown
-              a {href='#' class="dropdown-toggle" data-toggle="dropdown"
-                role="button" aria-haspopup="true" aria-expanded="false"}
+            li.nav-item.about.dropdown
+              a.nav-link.dropdown-toggle {href='#' id="submenu-right" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"}
                 ' О НАС
-                span.caret
-              ul.dropdown-menu
-                li: a.qa {href='/questions'
-                  class=('active' if current_path? '/questions')} ВОПРОСЫ
 
-                li: a.contacts{ href='/contacts'
-                  class=('active' if current_path? '/contacts')} КОНТАКТЫ
+              .dropdown-menu aria-labelledby="submenu-right"
 
-                li: a.about{ href='/about'
-                  class=('active' if current_path? '/about')} О НАС
+                a.dropdown-item.qa {href='/questions'
+                class=('active' if current_path? '/questions') } ВОПРОСЫ
 
-                li.divider role="separator"
+                a.dropdown-item.contacts{ href='/contacts'
+                class=('active' if current_path? '/contacts') } КОНТАКТЫ
+
+                a.dropdown-item.about{ href='/about'
+                class=('active' if current_path? '/about') } О НАС
+
+                .divider role="separator"
 
                 - if user_signed_in?
-                  li = link_to t(:log_out), destroy_user_session_path,
-                    method: :delete
+                  = link_to t(:log_out), destroy_user_session_path, class: 'dropdown-item', method: :delete
                 - else
-                  li = link_to t(:sign_in), new_user_session_path
+                  = link_to t(:sign_in), new_user_session_path, class: 'dropdown-item'
+
+
     .main-container.container
       = render partial: 'layouts/flash'
 

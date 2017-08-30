@@ -1,0 +1,90 @@
+html, body
+  height: 100%
+
+html
+  font-size: 18px
+
+body
+  &.overflow
+    overflow: hidden
+
+.turbolinks-progress-bar
+  height: 5px
+  background-color: #D9534F
+
+
+.main-container
+  border: 1px solid #e7e7e7
+  border-top: none
+  background-color: #f8f8f8
+  padding-top: 20px
+  padding-bottom: 20px
+
+
+// menu styling
+
+.navbar-light
+  padding-top: 0
+  padding-bottom: 0
+  .navbar-brand .brand-name
+    font-size: 12px
+  .dropdown-menu
+    //font-size: 18px
+  .navbar-nav
+    a.dropdown-item
+      text-transform: uppercase
+    a.nav-link
+      border-bottom: 6px solid transparent
+      padding: 0.7rem 0.8rem 0.5rem
+      transition: background-color  1s 0s ease, border 1s 0s ease
+      text-transform: uppercase
+      &.news
+        &.active
+          border-color: #ffef8b
+        &:hover
+          border-color: #ffef8b
+          background-color: #ffef8b
+      &.contacts
+        &.active
+          border-color: #D6F796
+        &:hover
+          border-color: #D6F796
+          background-color: #D6F796
+      &.videos
+        &.active
+          border-color: #CFD8E0
+        &:hover
+          border-color: #CFD8E0
+          background-color: #CFD8E0
+      &.ministry
+        &.active
+          border-color: #E2C4F7
+        &:hover
+          border-color: #E2C4F7
+          background-color: #E2C4F7
+      &.photos
+        &.active
+          border-color: #F9DDB3
+        &:hover
+          border-color: #F9DDB3
+          background-color: #F9DDB3
+      &.qa
+        &.active
+          border-color: #F7CEC8
+        &:hover
+          border-color: #F7CEC8
+          background-color: #F7CEC8
+      &.about
+        &.active
+          border-color: #C8F7DD
+        &:hover
+          border-color: #C8F7DD
+          background-color: #C8F7DD
+
+.block-shadow
+  border: 1px solid #ddd
+  box-shadow: 0 5px 25px #ccc
+  padding: 20px
+
+textarea.form-conrol
+  height: 200px

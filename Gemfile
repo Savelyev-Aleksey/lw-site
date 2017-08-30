@@ -18,9 +18,7 @@ gem 'coffee-rails'
 gem 'devise'
 
 gem 'slim'
-gem 'bootstrap-sass'
-# Try to use bootstrap 4 TODO migrate to bootstrap v4 alpha
-# gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap', '~> 4.0.0.beta'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 

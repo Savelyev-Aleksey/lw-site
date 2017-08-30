@@ -3,8 +3,8 @@
   = f.input :title
   .row
     .col-sm-6
-      = f.input :start_date
+      = f.input :start_date, start_year: 1990, end_year: Date.today().year + 1
     .col-sm-6
-      = f.input :end_date
+      = f.input :end_date, start_year: 1990, end_year: Date.today().year + 1
   = f.input :description, as: :text, input_html: {class: 'tinymce', rows: 20}
   = f.button :submit

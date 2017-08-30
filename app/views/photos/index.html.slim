@@ -2,7 +2,7 @@
   h1.text-center = t(:gallery).mb_chars.upcase
 
 - if user_signed_in?
-  p 
+  p
     = link_to new_photo_path, class: 'btn btn-primary', role: 'button' do
       span.glyphicon.glyphicon-file>
       = t :add
@@ -12,9 +12,10 @@
   - @albums.each do |album|
     - if !album.start_date.nil? && album.start_date.year != year
       - year = album.start_date.year
-      .clearfix
-      h2=year
-    div.gallery-list-elem.col-sm-12.col-md-6
+
+      h2.col-12 = year
+
+    div.gallery-list-elem.col-12.col-md-6
       = link_to photo_path(album) do
         .img-preview
           - if album.cover_id?
@@ -23,6 +24,6 @@
             span.glyphicon.glyphicon-picture
         .img-title
           = album.title
-    
-= paginate @albums    
-  
+
+= paginate @albums
+

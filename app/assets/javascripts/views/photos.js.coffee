@@ -46,8 +46,8 @@ class Carousel
 
 
   append_image: (url) ->
-    item = $('<div></div>').addClass('item')
-    img = $('<img>').attr src: url
+    item = $('<div>').addClass('carousel-item')
+    img = $('<img>').attr(src: url).addClass 'd-block w-100'
     item.append(img)
     @carousel_inner.append item
     return
@@ -66,7 +66,7 @@ class Carousel
     @carousel_inner.find('.active').removeClass('active')
     @gallery.find('img').each (i) ->
       if (img == this)
-        $(obj.carousel_inner.find('.item').get(i)).addClass('active')
+        $(obj.carousel_inner.find('.carousel-item').get(i)).addClass('active')
         obj.carousel.carousel i
         return false
       return
@@ -77,16 +77,17 @@ class Carousel
 
 
   constructor: ->
-    @wrapepr = $('#main-carousel-wrapper')
-    @carousel = $('#main-carousel')
-    @carousel_inner = $('#main-carousel .carousel-inner')
+    @carousel = $('#photo-slider')
+    @carousel_inner = $('#photo-slider > .carousel-inner')
     @gallery = $('#photo-gallery')
 
     # hide carousel
-    @carousel_inner.on 'click', =>
-      @wrapepr.addClass('hidden')
+    @carousel.on 'click', (e) =>
+      return if e.target.nodeName == 'A'
+      return if e.target.parentElement.nodeName == 'A'
       @carousel.carousel('pause')
-      $(document.body).removeClass('overflow')
+      @carousel.attr('hidden', true)
+      document.body.classList.remove 'overflow'
       return
 
     @prevent_submiting()
@@ -102,14 +103,16 @@ class Carousel
         obj.carousel.carousel
           interval: 5000
           wrap: false
+          ride: 'carousel'
+          pause: false
 
       # select current image in already prepared carousel
       obj.show_element(event.target)
 
       # show carousel
-      obj.wrapepr.removeClass('hidden')
+      obj.carousel.removeAttr 'hidden'
       # show black background
-      $(document.body).addClass('overflow')
+      $(document.body).addClass 'overflow'
       return
     return
 
@@ -157,7 +160,7 @@ class Carousel
 
 
 document.addEventListener "turbolinks:load", ->
-  if document.getElementById 'main-carousel'
+  if document.getElementById 'photo-slider'
     carousel = new Carousel
 
   if document.getElementById 'photo_uploader'
